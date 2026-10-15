@@ -2,33 +2,7 @@
 package com.javanauta.bffagendadortarefas.business.dto.out;
 
 import lombok.*;
-/*
- * ==========================================================
- * DTO - DATA TRANSFER OBJECT
- * ==========================================================
- *
- * O EnderecoDTO é utilizado para transportar os dados de um
- * endereço entre as diferentes camadas da aplicação.
- *
- * Diferente da Entity, o DTO não representa diretamente uma
- * tabela do banco de dados.
- *
- * Nesse projeto, podemos utilizar o DTO para receber os dados
- * enviados pelo cliente através da API e também para devolver
- * informações na resposta.
- *
- * Fluxo:
- *
- * JSON
- *   ↓
- * EnderecoDTO
- *   ↓
- * Converter
- *   ↓
- * Endereco (Entity)
- *   ↓
- * Banco de dados
- */
+
 @Getter
 @Setter
 @AllArgsConstructor
