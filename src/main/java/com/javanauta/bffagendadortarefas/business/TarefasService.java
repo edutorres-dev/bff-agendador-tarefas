@@ -11,13 +11,19 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
+/**
+ * Serviço responsável por intermediar as operações relacionadas às tarefas.
+ * Encaminha as solicitações para o microsserviço de tarefas através do Feign Client.
+ */
+
 @Service
 @RequiredArgsConstructor
 public class TarefasService {
 
     private final TarefasClient tarefasClient;
 
-
+    // Cadastra uma nova tarefa no microsserviço de tarefas.
     public TarefasDTOResponse gravarTarefa(String token, TarefasDTORequest dto) {
         return tarefasClient.gravarTarefas(dto,token);
     }
@@ -29,7 +35,6 @@ public class TarefasService {
 
         return tarefasClient.buscaListaDeTarefasPorPeriodo(dataInicial,dataFinal,token);
     }
-
 
 
 

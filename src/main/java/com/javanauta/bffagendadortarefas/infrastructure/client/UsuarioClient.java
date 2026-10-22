@@ -1,5 +1,4 @@
 package com.javanauta.bffagendadortarefas.infrastructure.client;
-
 import com.javanauta.bffagendadortarefas.business.dto.in.EnderecoDTORequest;
 import com.javanauta.bffagendadortarefas.business.dto.in.LoginRequestDTO;
 import com.javanauta.bffagendadortarefas.business.dto.in.TelefoneDTORequest;
@@ -10,77 +9,70 @@ import com.javanauta.bffagendadortarefas.business.dto.out.UsuarioDTOResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-// Cliente responsável por realizar chamadas para o serviço de usuários.
-@FeignClient(name = "usuario",url="${usuario.url}")
+// Cliente responsável pela comunicação com o serviço de usuários.
+@FeignClient(name = "usuario", url = "${usuario.url}")
 public interface UsuarioClient {
 
     // Busca os dados de um usuário através do e-mail informado.
     @GetMapping
-    UsuarioDTOResponse buscarUsuarioPorEmail (@RequestParam("email") String email ,
-                                              @RequestHeader("Authorization") String token);
+    UsuarioDTOResponse buscarUsuarioPorEmail(
+            @RequestParam("email") String email,
+            @RequestHeader("Authorization") String token
+    );
 
-
-
-
-    /*
-     * ==========================================================
-     * CADASTRO DE USUÁRIO
-     * ==========================================================
-     *
-     *
-     */
+    // Cadastra um novo usuário no serviço de usuários.
     @PostMapping
-    UsuarioDTOResponse salvaUsuario(@RequestBody UsuarioDTORequest usuarioDTOResponse);
+    UsuarioDTOResponse salvaUsuario(
+            @RequestBody UsuarioDTORequest usuarioDTOResponse
+    );
 
-
-    /*
-     * ==================
-     * LOGIN
-     * ==================
-     * */
-
+    // Realiza o login do usuário e retorna o token JWT.
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequestDTO usuarioDTOResponse);
+    String login(
+            @RequestBody LoginRequestDTO usuarioDTOResponse
+    );
 
-
-    /*
-     * =======================
-     * DELETAR USUÁRIO
-     * =======================
-     *
-     * */
-
+    // Exclui um usuário pelo e-mail informado.
     @DeleteMapping("/{email}")
-    void deletaUsuarioPorEmail(@PathVariable String email , @RequestHeader("Authorization") String token);
+    void deletaUsuarioPorEmail(
+            @PathVariable String email,
+            @RequestHeader("Authorization") String token
+    );
 
-    /*
-     * =======================
-     * ATUALIZAR DADOS
-     * =======================
-     */
-
-    // Endpoint responsável por atualizar os dados do usuário autenticado.
+    // Atualiza os dados do usuário autenticado.
     @PutMapping
-    UsuarioDTOResponse atualizaDadoUsuario(@RequestBody UsuarioDTORequest dto,
-                                           @RequestHeader("Authorization") String token);
+    UsuarioDTOResponse atualizaDadoUsuario(
+            @RequestBody UsuarioDTORequest dto,
+            @RequestHeader("Authorization") String token
+    );
 
+    // Atualiza um endereço existente pelo ID.
     @PutMapping("/endereco")
-    EnderecoDTOResponse atualizaEndereco(@RequestBody EnderecoDTORequest dto ,
-                                         @RequestParam("id") Long id,
-                                         @RequestHeader("Authorization") String token);
+    EnderecoDTOResponse atualizaEndereco(
+            @RequestBody EnderecoDTORequest dto,
+            @RequestParam("id") Long id,
+            @RequestHeader("Authorization") String token
+    );
 
-
+    // Atualiza um telefone existente pelo ID.
     @PutMapping("/telefone")
-    TelefoneDTOResponse atualizaTelefone(@RequestBody TelefoneDTORequest dto , @RequestParam("id") Long id ,
-                                         @RequestHeader("Authorization") String token);
+    TelefoneDTOResponse atualizaTelefone(
+            @RequestBody TelefoneDTORequest dto,
+            @RequestParam("id") Long id,
+            @RequestHeader("Authorization") String token
+    );
 
+    // Cadastra um novo endereço para o usuário.
     @PostMapping("/endereco")
-    EnderecoDTOResponse cadastraEndereco(@RequestBody EnderecoDTORequest dto ,
-                                         @RequestHeader("Authorization") String token);
+    EnderecoDTOResponse cadastraEndereco(
+            @RequestBody EnderecoDTORequest dto,
+            @RequestHeader("Authorization") String token
+    );
 
+    // Cadastra um novo telefone para o usuário.
     @PostMapping("/telefone")
-    TelefoneDTOResponse cadastraTelefone(@RequestBody TelefoneDTORequest dto ,
-                                         @RequestHeader("Authorization") String token);
-
-
+    TelefoneDTOResponse cadastraTelefone(
+            @RequestBody TelefoneDTORequest dto,
+            @RequestHeader("Authorization") String token
+    );
 }

@@ -14,6 +14,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+
+/**
+ * Serviço responsável por intermediar as operações relacionadas aos usuários.
+ * Encaminha as solicitações para o microsserviço de usuários através do Feign Client.
+ */
 public class UsuarioService {
 
     // Client responsável por comunicar com o serviço de usuários.
